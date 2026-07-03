@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: fullStack.calculator.service.CalculatorControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.299 s -- in fullStack.calculator.service.CalculatorControllerTest
