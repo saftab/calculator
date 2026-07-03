@@ -58,7 +58,7 @@ Request : {
 }
 Response 
 {
-  "result": 5
+  "result": 15
 }
 
 ### Square Root
