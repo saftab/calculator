@@ -1,116 +1,388 @@
-# Project Overview
+# Full Stack Calculator Application
 
-# Full Stack Calculator
+A full-stack calculator application built using Spring Boot (backend) and React + Vite (frontend). The application supports basic arithmetic operations through a REST API and provides a responsive user interface for performing calculations.
 
-A full-stack calculator application built with React and Spring Boot.
+---
 
 ## Features
+
+### Supported Operations
 
 - Addition
 - Subtraction
 - Multiplication
 - Division
-- Power
+- Exponentiation
 - Square Root
 - Percentage
 
-## Technology Stack
-
 ### Frontend
-- React
-- TypeScript
-- Axios
-- Vite
+
+- React + Vite
+- Responsive UI
+- Client-side validation
+- Error handling and user feedback
+- API integration with backend services
 
 ### Backend
-- Spring Boot 3
+
+- Spring Boot REST API
+- Layered architecture (Controller → Service)
+- Request validation
+- Centralized exception handling
+- Unit tested business logic
+
+---
+
+## Project Structure
+
+```text
+calculator/
+├── backend/
+│   └── sezzle-calculator/
+├── frontend/
+├── docker-compose.yml
+└── README.md
+```
+
+---
+
+## Technology Stack
+
+### Backend
+
 - Java 21
+- Spring Boot
 - Maven
 - JUnit 5
 
-# Setup Instructions
+### Frontend
 
-## Backend Setup
+- React
+- Vite
+- Material UI
+- Axios
 
-Navigate to backend directory:
-cd backend
-run - mvn spring-boot:run
-backend will start on **http://localhost:8080**
+### DevOps
 
+- Docker
+- Docker Compose
 
-## Frontend Setup
+---
 
-Navigate to frontend directory:
+## Setup Instructions
+
+### Prerequisites
+
+- Java 21+
+- Maven 3.9+
+- Node.js 20+
+- npm
+- Docker (Optional)
+
+---
+
+## Running the Backend
+
+Navigate to the backend project:
+
+```bash
+cd backend/sezzle-calculator
+```
+
+Build the application:
+
+```bash
+mvn clean install
+```
+
+Run the application:
+
+```bash
+mvn spring-boot:run
+```
+
+Backend will be available at:
+
+```text
+http://localhost:8080
+```
+
+---
+
+## Running the Frontend
+
+Navigate to frontend:
+
+```bash
 cd frontend
-npm install - to install dependecies
-npm run dev - start application
-http://localhost:5173 - UI url 
+```
 
+Install dependencies:
 
-## API Usage
+```bash
+npm install
+```
 
-### Add
-POST /api/calculator/add
+Start development server:
 
-Request : {
-  "num1": 10,
-  "num2": 2
+```bash
+npm run dev
+```
+
+Frontend will be available at:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## API Examples
+
+### Addition
+
+Request:
+
+```http
+POST /api/calculate
+```
+
+```json
+{
+  "operation": "ADD",
+  "firstNumber": 10,
+  "secondNumber": 5
 }
-Response 
+```
+
+Response:
+
+```json
 {
   "result": 15
 }
+```
 
-### Square Root
-POST /api/calculator/sqrt
+---
 
-Request : {
-  "num1": 25
+### Subtraction
+
+```json
+{
+  "operation": "SUBTRACT",
+  "firstNumber": 10,
+  "secondNumber": 5
 }
-Response 
+```
+
+Response:
+
+```json
 {
   "result": 5
 }
+```
 
-### Running tests 
+---
 
-Backend tests: 
-mvn tests
+### Multiplication
 
-mvn clean verify will generate coverage report at this location - target/site/jacoco/index.html
+```json
+{
+  "operation": "MULTIPLY",
+  "firstNumber": 10,
+  "secondNumber": 5
+}
+```
 
+Response:
 
-## Design Rationale
+```json
+{
+  "result": 50
+}
+```
 
-```md
+---
+
+### Division
+
+```json
+{
+  "operation": "DIVIDE",
+  "firstNumber": 10,
+  "secondNumber": 5
+}
+```
+
+Response:
+
+```json
+{
+  "result": 2
+}
+```
+
+---
+
+### Exponentiation
+
+```json
+{
+  "operation": "POWER",
+  "firstNumber": 2,
+  "secondNumber": 3
+}
+```
+
+Response:
+
+```json
+{
+  "result": 8
+}
+```
+
+---
+
+### Square Root
+
+```json
+{
+  "operation": "SQRT",
+  "firstNumber": 25
+}
+```
+
+Response:
+
+```json
+{
+  "result": 5
+}
+```
+
+---
+
+### Percentage
+
+```json
+{
+  "operation": "PERCENTAGE",
+  "firstNumber": 50,
+  "secondNumber": 200
+}
+```
+
+Response:
+
+```json
+{
+  "result": 25
+}
+```
+
+---
+
 ## Design Decisions
 
 ### Backend
 
-- Controller layer handles HTTP requests and responses.
-- Service layer encapsulates business logic.
-- Global exception handler provides consistent error responses.
-- Bean validation ensures request validation.
+- Spring Boot was chosen for rapid API development and maintainability.
+- Business logic is isolated in the Service layer.
+- Controllers handle request/response orchestration only.
+- Global exception handling provides consistent API error responses.
+- Validation ensures invalid requests are rejected early.
+- REST APIs follow a simple request/response model for easy frontend integration.
 
 ### Frontend
 
-- API calls are isolated in a dedicated service layer.
-- Client-side validation prevents unnecessary API calls.
-- Error handling provides meaningful feedback to users.
+- React with Vite provides a lightweight and fast development experience.
+- API communication is abstracted into a dedicated service layer.
+- Form validation is performed before API submission.
+- Error messages are displayed clearly to improve user experience.
 - Responsive layout supports desktop and mobile devices.
 
-### Testing
+### Architecture
 
-- Unit tests cover calculator business logic.
-- Edge cases such as division by zero and negative square root inputs are validated.
+- Clear separation of concerns between UI and business logic.
+- Stateless REST API design.
+- Frontend and backend can be deployed independently.
+
+---
+
+## Running Tests
+
+Backend unit tests:
+
+```bash
+cd backend/sezzle-calculator
+
+mvn test
+```
+
+---
+
+## Coverage Report
+
+Generate coverage report:
+
+```bash
+mvn clean test jacoco:report
+```
+
+Coverage report location:
+
+```text
+target/site/jacoco/index.html
+```
+
+Open the generated HTML report in a browser to view detailed code coverage metrics.
+
+---
 
 ## Docker
 
-Build the backend image:
+### Backend Docker Image
+
+Navigate to backend:
 
 ```bash
-mvn clean package
-docker build -t calculator-backend .
+cd backend/sezzle-calculator
+```
 
+Build image:
+
+```bash
+docker build -t calculator-backend .
+```
+
+Run container:
+
+```bash
 docker run -p 8080:8080 calculator-backend
-The API will be available at localhost://8080
+```
+
+Backend API:
+
+```text
+http://localhost:8080
+```
+
+---
+
+## Running Full Stack with Docker Compose
+
+From repository root:
+
+```bash
+docker-compose up --build
+```
+
+Services:
+
+| Service | URL |
+|----------|----------|
+| Frontend | http://localhost:5173 |
+| Backend | http://localhost:8080 |
