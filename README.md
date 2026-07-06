@@ -386,3 +386,13 @@ Services:
 |----------|----------|
 | Frontend | http://localhost:5173 |
 | Backend | http://localhost:8080 |
+
+
+## Prompts
+
+During development, the following prompts were given:
+
+- Fixed handling of zero results (`0`) to ensure calculations displaying `0` are rendered correctly instead of being treated as a falsy value.
+- Implemented regex-based input validation to allow only valid numeric values and prevent invalid API requests.
+- Cleared previous calculation results when displaying validation or API error messages to avoid stale information.
+- Cleared previous error messages upon successful calculations.
